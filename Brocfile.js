@@ -1,8 +1,12 @@
-/* global require, module */
+/* global require, module, __dirname */
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-var app = new EmberApp();
+var app = new EmberApp({
+  sassOptions: {
+    includePaths: [__dirname + '/node_modules']
+  }
+});
 
 // Use `app.import` to add additional libraries to the generated
 // output files.
