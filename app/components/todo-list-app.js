@@ -1,5 +1,14 @@
 import Ember from 'ember';
 
+var slice = Array.prototype.slice;
+
 export default Ember.Component.extend({
-  classNames: ['todo-list-app']
+  actions: {
+    submitForm() {
+      var data = ['formSubmit'].concat(slice.call(arguments));
+      this.sendAction.apply(this, data);
+    }
+  },
+  classNames: ['todo-list-app'],
+  formSubmit: 'createTodo'
 });
