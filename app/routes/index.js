@@ -4,7 +4,14 @@ export default Ember.Route.extend({
   actions: {
     createTodo(todoData) {
       var todo = this.store.createRecord('TodoItem', todoData);
-      todo.save();
+      return todo.save();
+    },
+    updateTodo(id, todoData) {
+      return this.store.find('TodoItem', id)
+        .then(function(todo) {
+          Object.keys(todoData).forEach(prop => todo.set(prop, todoData[prop]));
+          return todo.save();
+        });
     }
   },
   model() {
