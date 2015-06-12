@@ -1,0 +1,7 @@
+<div class="todo-list-filter">
+  {{#each links as |link|}}
+    {{#todo-list-filter-link text=link selectedLink=currentFilter action="changeFilter"}}
+      {{link}}
+    {{/todo-list-filter-link}}
+  {{/each}}
+</div>

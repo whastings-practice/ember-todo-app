@@ -1,4 +1,5 @@
 <h1>Your Todos</h1>
 
 {{todo-list-form on-submit=(action "submitForm")}}
-{{todo-list items=todos on-item-change=(action "updateTodo")}}
+{{todo-list items=todos filter=todoFilter on-item-change=(action "updateTodo")}}
+{{todo-list-filter on-change=(action "filterTodos")}}
