@@ -1,2 +1,6 @@
 {{action-checkbox is-checked=item.completed action="toggleCompleted"}}
 {{item.title}}
+<button class="todo-list__item__delete-btn" type="button" {{action "delete"}}>
+  <span class="delete-icon">✖</span>
+  <span class="todo-list__item__delete-btn__text">Delete todo {{item.title}}</span>
+</button>

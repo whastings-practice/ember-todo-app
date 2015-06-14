@@ -2,6 +2,9 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   actions: {
+    deleteTodo(todo) {
+      this.sendAction('todoDeleteAction', todo);
+    },
     filterTodos(newFilter) {
       this.set('todoFilter', newFilter);
     },
@@ -22,6 +25,7 @@ export default Ember.Component.extend({
   classNames: ['todo-list-app'],
   formSubmitAction: 'createTodo',
   isAdding: false,
+  todoDeleteAction: 'deleteTodo',
   todoFilter: 'uncompleted',
   todoUpdateAction: 'updateTodo'
 });
