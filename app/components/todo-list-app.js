@@ -5,7 +5,14 @@ export default Ember.Component.extend({
     filterTodos(newFilter) {
       this.set('todoFilter', newFilter);
     },
+    hideAddForm() {
+      this.set('isAdding', false);
+    },
+    showAddForm() {
+      this.set('isAdding', true);
+    },
     submitForm(data) {
+      this.set('isAdding', false);
       this.sendAction('formSubmitAction', data);
     },
     updateTodo(id, data) {
@@ -14,6 +21,7 @@ export default Ember.Component.extend({
   },
   classNames: ['todo-list-app'],
   formSubmitAction: 'createTodo',
+  isAdding: false,
   todoFilter: 'uncompleted',
   todoUpdateAction: 'updateTodo'
 });
