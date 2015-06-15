@@ -14,7 +14,7 @@ export default Ember.Component.extend(Focusable, {
     },
     hideAddForm() {
       this.set('isAdding', false);
-      this.one('didRender', this, () => this.focusChild(`.${ADD_BTN_CLASS}`));
+      this.focusOnRerender(`.${ADD_BTN_CLASS}`);
     },
     showAddForm() {
       this.set('isAdding', true);
@@ -22,7 +22,7 @@ export default Ember.Component.extend(Focusable, {
     submitForm(data) {
       this.set('isAdding', false);
       this.sendAction('formSubmitAction', data);
-      this.one('didRender', this, () => this.focusChild(`.${ADD_BTN_CLASS}`));
+      this.focusOnRerender(`.${ADD_BTN_CLASS}`);
     },
     updateTodo(id, data) {
       this.sendAction('todoUpdateAction', id, data);
@@ -30,7 +30,7 @@ export default Ember.Component.extend(Focusable, {
   },
   classNames: ['todo-list-app'],
   didInsertElement() {
-    this.focusChild('h2');
+    this.focusChild('h1');
   },
   formSubmitAction: 'createTodo',
   isAdding: false,
