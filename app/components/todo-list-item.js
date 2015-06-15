@@ -7,7 +7,7 @@ var ITEM_CLASS = 'todo-list__item';
 export default Ember.Component.extend({
   actions: {
     delete() {
-      this.attrs['on-delete'](this.get('item'));
+      this.attrs['on-delete'](this);
     },
     toggleCompleted(value, checked) {
       this.attrs['on-change'](this.get('todoId'), {completed: checked});

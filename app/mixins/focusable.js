@@ -18,16 +18,15 @@ export default Ember.Mixin.create({
 });
 
 function focusEl($el) {
-  var removeIndexAfterFocus = false;
-  if (isDefaultFocusable($el[0]) || $el.attr('tabindex') === '0') {
-    removeIndexAfterFocus = true;
-  }
+  var origTabIndex = $el.attr('tabindex');
 
   $el.attr('tabindex', -1);
   $el.focus();
 
-  if (removeIndexAfterFocus) {
+  if (isDefaultFocusable($el[0])) {
     $el.removeAttr('tabindex');
+  } else if (origTabIndex === '0') {
+    $el.attr('tabindex', 0);
   }
 }
 
