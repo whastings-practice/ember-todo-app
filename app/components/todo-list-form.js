@@ -1,10 +1,16 @@
 import Ember from 'ember';
+import Focusable from '../mixins/focusable';
 
-export default Ember.Component.extend({
+var FORM_CLASS = 'todo-list__form';
+
+export default Ember.Component.extend(Focusable, {
   actions: {
     cancel() {
       this.attrs['on-cancel']();
     }
+  },
+  didInsertElement() {
+    this.focusChild(`.${FORM_CLASS}__title-input`);
   },
   submit(event) {
     var todoData = {title: this.get('title')};
@@ -12,7 +18,7 @@ export default Ember.Component.extend({
     this.attrs['on-submit'](todoData);
     this.set('title', '');
   },
-  classNames: ['todo-list__form'],
+  classNames: [FORM_CLASS],
   tagName: 'form',
   title: ''
 });

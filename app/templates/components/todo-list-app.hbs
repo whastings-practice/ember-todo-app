@@ -3,7 +3,9 @@
 {{#if isAdding}}
   {{todo-list-form on-submit=(action "submitForm") on-cancel=(action "hideAddForm")}}
 {{else}}
-  <button class="btn" type="button" {{action "showAddForm"}}>Add New</button>
+  <button class="btn todo-list-app__add-btn" type="button" {{action "showAddForm"}}>
+    Add New
+  </button>
 {{/if}}
 {{todo-list items=todos filter=todoFilter
             on-item-change=(action "updateTodo") on-item-delete=(action "deleteTodo")}}

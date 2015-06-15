@@ -5,7 +5,7 @@ import Ember from 'ember';
 // - https://github.com/emberjs/ember.js/issues/5433
 // - http://emberjs.jsbin.com/rwjblue/58/edit?html,js,output
 export default Ember.Component.extend({
-  attributeBindings: ['type', 'value'],
+  attributeBindings: ['aria-label', 'type', 'value'],
   tagName: 'input',
   type: 'checkbox',
   checked: false,
