@@ -2,6 +2,8 @@
 
 # compiled output
 /dist
+/dist_prod
+/gh_pages
 /tmp
 
 # dependencies
