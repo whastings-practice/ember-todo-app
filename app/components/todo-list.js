@@ -23,6 +23,19 @@ export default Ember.Component.extend(Focusable, {
       this.attrs['on-item-delete'](todo);
     }
   },
+  'aria-label': computed('filter', function() {
+    var currentFilter = this.get('filter');
+    return `${currentFilter} todo items`;
+  }),
+  attributeBindings: ['aria-label'],
+  didReceiveAttrs(attrs) {
+    var {newAttrs, oldAttrs} = attrs,
+        newFilter = newAttrs.filter.value;
+
+    if (oldAttrs && (oldAttrs.filter.value !== newFilter)) {
+      this.focusSelfOnRerender();
+    }
+  },
   classNameBindings: ['filterClass'],
   classNames: ['todo-list'],
   filterClass: computed('filter', function() {
