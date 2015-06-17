@@ -10,13 +10,21 @@ export default Ember.Component.extend({
       this.attrs['on-delete'](this);
     },
     toggleCompleted(value, checked) {
-      this.attrs['on-change'](this.get('todoId'), {completed: checked});
+      this.attrs['on-change'](this, {completed: checked});
     }
   },
+  'aria-hidden': computed('isMarkedCompleted', function() {
+    var isMarkedCompleted = this.get('isMarkedCompleted'),
+        showIfCompleted = this.attrs['show-if-completed'].value,
+        showIfUncompleted = this.attrs['show-if-uncompleted'].value;
+
+    return (isMarkedCompleted && !showIfCompleted) ||
+      (!isMarkedCompleted && !showIfUncompleted);
+  }),
   'aria-labelledby': computed('titleId', function() {
     return this.get('titleId');
   }),
-  attributeBindings: ['aria-labelledby', 'tabindex'],
+  attributeBindings: ['aria-hidden', 'aria-labelledby', 'tabindex'],
   classNameBindings: [
     `isMarkedCompleted:${ITEM_CLASS}--completed:${ITEM_CLASS}--uncompleted`
   ],

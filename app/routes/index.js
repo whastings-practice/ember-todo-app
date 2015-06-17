@@ -10,12 +10,9 @@ export default Ember.Route.extend({
       todo.deleteRecord();
       return todo.save();
     },
-    updateTodo(id, todoData) {
-      return this.store.find('TodoItem', id)
-        .then(function(todo) {
-          Object.keys(todoData).forEach(prop => todo.set(prop, todoData[prop]));
-          return todo.save();
-        });
+    updateTodo(todo, todoData) {
+      Object.keys(todoData).forEach(prop => todo.set(prop, todoData[prop]));
+      return todo.save();
     }
   },
   model() {
