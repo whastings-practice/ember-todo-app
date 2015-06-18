@@ -1,4 +1,4 @@
-{{#each links as |link|}}
+{{#each links key="@guid" as |link|}}
   {{#todo-list-filter-link text=link selectedLink=currentFilter action="changeFilter"}}
     {{link}}
   {{/todo-list-filter-link}}

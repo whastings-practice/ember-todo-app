@@ -7,6 +7,13 @@
     Add New
   </button>
 {{/if}}
-{{todo-list items=todos filter=todoFilter
+
+{{todo-list items=todos filter=todoFilter tabindex=listTabIndex
             on-item-change=(action "updateTodo") on-item-delete=(action "deleteTodo")}}
+{{#unless todosAreVisible}}
+  <div class="todo-list-app__empty-message">
+    {{emptyMessage}}
+  </div>
+{{/unless}}
+
 {{todo-list-filter on-change=(action "filterTodos")}}

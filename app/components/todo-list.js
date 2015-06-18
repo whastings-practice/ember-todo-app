@@ -24,7 +24,7 @@ export default Ember.Component.extend(Focusable, {
     var currentFilter = this.get('filter');
     return `${currentFilter} todo items`;
   }),
-  attributeBindings: ['aria-label'],
+  attributeBindings: ['aria-label', 'tabindex'],
   didReceiveAttrs(attrs) {
     var {newAttrs, oldAttrs} = attrs,
         newFilter = newAttrs.filter.value;
