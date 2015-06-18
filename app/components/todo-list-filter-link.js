@@ -9,19 +9,22 @@ export default Ember.Component.extend({
   attributeBindings: ['aria-checked', 'href', 'role'],
   classNames: [LINK_CLASS],
   classNameBindings: [`isSelected:${LINK_CLASS}--selected`],
+  href: '#',
+  role: 'menuitemradio',
+  tagName: 'a',
+
   click(event) {
     event.preventDefault();
     this.sendAction('action', this.get('text'));
   },
-  href: '#',
+
   isSelected: computed('selectedLink', 'text', function() {
     return this.get('text') === this.get('selectedLink');
   }),
+
   keyDown(event) {
     if (event.keyCode === 32) {
       this.sendAction('action', this.get('text'));
     }
-  },
-  role: 'menuitemradio',
-  tagName: 'a'
+  }
 });

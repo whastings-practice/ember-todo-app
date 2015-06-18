@@ -4,6 +4,11 @@ import Focusable from '../mixins/focusable';
 var computed = Ember.computed;
 
 export default Ember.Component.extend(Focusable, {
+  attributeBindings: ['aria-label', 'tabindex'],
+  classNameBindings: ['filterClass'],
+  classNames: ['todo-list'],
+  tagName: 'ul',
+
   actions: {
     deleteItem(itemComponent) {
       var todo = itemComponent.get('item');
@@ -12,6 +17,7 @@ export default Ember.Component.extend(Focusable, {
 
       this.attrs['on-item-delete'](todo);
     },
+
     updateItem(itemComponent, props) {
       if (this.get('filter') !== 'all') {
         this._moveItemFocus(itemComponent);
@@ -20,11 +26,12 @@ export default Ember.Component.extend(Focusable, {
       this.attrs['on-item-change'](itemComponent.get('item'), props);
     }
   },
+
   'aria-label': computed('filter', function() {
     var currentFilter = this.get('filter');
     return `${currentFilter} todo items`;
   }),
-  attributeBindings: ['aria-label', 'tabindex'],
+
   didReceiveAttrs(attrs) {
     var {newAttrs, oldAttrs} = attrs,
         newFilter = newAttrs.filter.value;
@@ -33,26 +40,28 @@ export default Ember.Component.extend(Focusable, {
       this.focusSelfOnRerender();
     }
   },
-  classNameBindings: ['filterClass'],
-  classNames: ['todo-list'],
+
   filterClass: computed('filter', function() {
     var currentFilter = this.get('filter');
     return `todo-list--${currentFilter}`;
   }),
+
   showIfCompleted: computed('filter', function() {
     var filter = this.get('filter');
     return filter === 'all' || filter === 'completed';
   }),
+
   showIfUncompleted: computed('filter', function() {
     var filter = this.get('filter');
     return filter === 'all' || filter === 'uncompleted';
   }),
-  tagName: 'ul',
+
   visibleItemClass: computed('filter', function() {
     var currentFilter = this.get('filter');
     return currentFilter === 'all' ? 'todo-list__item' :
       `todo-list__item--${currentFilter}`;
   }),
+
   _moveItemFocus(itemComponent) {
     var itemClass = `.${this.get('visibleItemClass')}`,
         $itemEl = itemComponent.$(),

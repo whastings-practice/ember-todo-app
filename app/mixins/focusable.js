@@ -9,12 +9,15 @@ export default Ember.Mixin.create({
     }
     focusEl(child);
   },
+
   focusOnRerender(selector) {
     this.one('didRender', this, () => this.focusChild(selector));
   },
+
   focusSelf() {
     focusEl(this.$());
   },
+
   focusSelfOnRerender() {
     this.one('didRender', this, () => this.focusSelf());
   }

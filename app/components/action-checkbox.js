@@ -6,18 +6,18 @@ import Ember from 'ember';
 // - http://emberjs.jsbin.com/rwjblue/58/edit?html,js,output
 export default Ember.Component.extend({
   attributeBindings: ['aria-label', 'type', 'value'],
+  checked: false,
   tagName: 'input',
   type: 'checkbox',
-  checked: false,
-
-  _updateChecked: function() {
-    this.$().prop('checked', this.get('is-checked'));
-  }.on('didInsertElement'),
 
   change: function(){
     this.toggleProperty('is-checked');
     this._updateChecked();
 
     this.sendAction('action', this.get('value'), this.get('is-checked'));
-  }
+  },
+
+  _updateChecked: function() {
+    this.$().prop('checked', this.get('is-checked'));
+  }.on('didInsertElement')
 });
