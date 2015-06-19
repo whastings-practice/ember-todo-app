@@ -33,6 +33,8 @@ export default Ember.Component.extend(Focusable, {
     },
 
     submitForm(data) {
+      // TODO: Wait for save to store to complete.
+      this.displayAlertMessage(`Added todo item ${data.title}.`);
       this.set('isAdding', false);
       this.sendAction('formSubmitAction', data);
       this.focusOnRerender(`.${ADD_BTN_CLASS}`);

@@ -8,3 +8,7 @@
     margin-bottom: 20px;
   }
 }
+
+#sr-alert {
+  @include sr-only();
+}

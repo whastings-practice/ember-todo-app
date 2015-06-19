@@ -1,8 +1,19 @@
+import $ from 'jquery';
 import Ember from 'ember';
 
 var FOCUSABLE_TAGS = ['a', 'button', 'input', 'option', 'select', 'textarea'];
 
 export default Ember.Mixin.create({
+  displayAlertMessage(message) {
+    var $alertEl = $('#sr-alert');
+
+    if (!$alertEl.length) {
+      throw new Error('Screen reader alert element (#sr-alert) is missing.');
+    }
+
+    $alertEl.text(message);
+  },
+
   focusChild(child) {
     if (typeof child === 'string') {
       child = this.$().find(child);

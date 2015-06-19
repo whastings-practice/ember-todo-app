@@ -1,10 +1,11 @@
 import Ember from 'ember';
+import Focusable from '../mixins/focusable';
 
 var computed = Ember.computed;
 
 var ITEM_CLASS = 'todo-list__item';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(Focusable, {
   attributeBindings: ['aria-hidden', 'aria-labelledby', 'tabindex'],
   classNameBindings: [
     `isMarkedCompleted:${ITEM_CLASS}--completed:${ITEM_CLASS}--uncompleted`
@@ -17,11 +18,24 @@ export default Ember.Component.extend({
 
   actions: {
     delete() {
+      var item = this.get('item'),
+          title = item.get('title');
+
       this.attrs['on-delete'](this);
+
+      // TODO: Wait for save to store to complete.
+      this.displayAlertMessage(`Deleted todo item ${title}`);
     },
 
     toggleCompleted(value, checked) {
+      var item = this.get('item'),
+          completedDesc = checked ? 'completed' : 'uncompleted',
+          title = item.get('title');
+
       this.attrs['on-change'](this, {completed: checked});
+
+      // TODO: Wait for save to store to complete.
+      this.displayAlertMessage(`Marked ${completedDesc} todo item ${title}`);
     }
   },
 
