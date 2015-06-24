@@ -1,10 +1,15 @@
-<h1>Your Todos</h1>
+<h1>
+  Your Todos
+  <span class="sr-text">
+    Todo item list below. Use down arrow to start interacting with the list.
+  </span>
+</h1>
 
 {{#if isAdding}}
   {{todo-list-form on-submit=(action "submitForm") on-cancel=(action "hideAddForm")}}
 {{else}}
   <button class="btn todo-list-app__add-btn" type="button" {{action "showAddForm"}}>
-    Add New
+    Add New<span class="sr-text"> todo item</span>
   </button>
 {{/if}}
 

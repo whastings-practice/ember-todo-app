@@ -1,5 +1,9 @@
-<label for="todo-form-add-title">Title</label>
+<label for="todo-form-add-title">Title of new todo item</label>
 {{input type="text" value=title placeholder="Title" id="todo-form-add-title"
         class="todo-list__form__title-input"}}
-<button class="btn">Add</button>
-<button class="btn" type="button" {{action "cancel"}}>Cancel</button>
+<button class="btn">
+  Add<span class="sr-text"> todo item</span>
+</button>
+<button class="btn" type="button" {{action "cancel"}}>
+  Cancel<span class="sr-text"> adding todo item</span>
+</button>

@@ -1,6 +1,9 @@
 {{action-checkbox is-checked=item.completed action="toggleCompleted"
                   aria-label=completeLabel}}
-<span id={{titleId}}>{{item.title}}</span>
+<span id={{titleId}}>
+  <span aria-hidden="true">{{item.title}}</span>
+  <span class="sr-text">{{a11yTitle}}</span>
+</span>
 <button class="todo-list__item__delete-btn" type="button" {{action "delete"}}>
   <span class="delete-icon" aria-hidden="true">✖</span>
   <span class="todo-list__item__delete-btn__text">Delete todo item {{item.title}}</span>

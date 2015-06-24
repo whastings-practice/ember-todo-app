@@ -12,3 +12,7 @@
 #sr-alert {
   @include sr-only();
 }
+
+.sr-text {
+  @include sr-only();
+}

@@ -39,6 +39,11 @@ export default Ember.Component.extend(Focusable, {
     }
   },
 
+  a11yTitle: computed('item.title', function() {
+    var item = this.get('item');
+    return `Todo item ${item.get('title')}`;
+  }),
+
   'aria-hidden': computed('isMarkedCompleted', function() {
     var isMarkedCompleted = this.get('isMarkedCompleted'),
         showIfCompleted = this.attrs['show-if-completed'].value,
