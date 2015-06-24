@@ -8,17 +8,10 @@ var APP_CLASS = 'todo-list-app',
 
 export default Ember.Component.extend(Focusable, {
   classNames: ['todo-list-app'],
-  formSubmitAction: 'createTodo',
   isAdding: false,
-  todoDeleteAction: 'deleteTodo',
   todoFilter: 'uncompleted',
-  todoUpdateAction: 'updateTodo',
 
   actions: {
-    deleteTodo(todo) {
-      this.sendAction('todoDeleteAction', todo);
-    },
-
     filterTodos(newFilter) {
       this.set('todoFilter', newFilter);
     },
@@ -36,12 +29,8 @@ export default Ember.Component.extend(Focusable, {
       // TODO: Wait for save to store to complete.
       this.displayAlertMessage(`Added todo item ${data.title}.`);
       this.set('isAdding', false);
-      this.sendAction('formSubmitAction', data);
+      this.attrs['on-add'](data);
       this.focusOnRerender(`.${ADD_BTN_CLASS}`);
-    },
-
-    updateTodo(id, data) {
-      this.sendAction('todoUpdateAction', id, data);
     }
   },
 

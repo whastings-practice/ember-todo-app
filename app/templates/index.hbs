@@ -1,1 +1,2 @@
-{{todo-list-app todos=model}}
+{{todo-list-app todos=model on-add=(action "createTodo")
+                on-update=(action "updateTodo") on-delete=(action "deleteTodo")}}

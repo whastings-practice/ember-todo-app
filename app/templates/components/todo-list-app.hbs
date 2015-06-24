@@ -14,7 +14,7 @@
 {{/if}}
 
 {{todo-list items=todos filter=todoFilter tabindex=listTabIndex
-            on-item-change=(action "updateTodo") on-item-delete=(action "deleteTodo")}}
+            on-item-change=attrs.on-update on-item-delete=attrs.on-delete}}
 {{#unless todosAreVisible}}
   <div class="todo-list-app__empty-message">
     {{emptyMessage}}
