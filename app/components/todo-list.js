@@ -37,7 +37,7 @@ export default Ember.Component.extend(Focusable, {
         newFilter = newAttrs.filter.value;
 
     if (oldAttrs && (oldAttrs.filter.value !== newFilter)) {
-      this.focusSelfOnRerender();
+      this.focusAfterRender();
     }
   },
 
@@ -69,11 +69,11 @@ export default Ember.Component.extend(Focusable, {
         $prevEl = $itemEl.prev(itemClass);
 
     if ($nextEl.length) {
-      this.focusChild($nextEl);
+      this.focus($nextEl);
     } else if ($prevEl.length) {
-      this.focusChild($prevEl);
+      this.focus($prevEl);
     } else {
-      this.focusChild($itemEl.parent());
+      this.focus($itemEl.parent());
     }
   }
 });

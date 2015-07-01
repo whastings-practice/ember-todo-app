@@ -3,6 +3,8 @@ import Ember from 'ember';
 
 var FOCUSABLE_TAGS = ['a', 'button', 'input', 'option', 'select', 'textarea'];
 
+var run = Ember.run;
+
 export default Ember.Mixin.create({
   displayAlertMessage(message) {
     var $alertEl = $('#sr-alert');
@@ -14,23 +16,26 @@ export default Ember.Mixin.create({
     $alertEl.text(message);
   },
 
-  focusChild(child) {
+  focus(child) {
+    if (!child) {
+      return focusEl(this.$());
+    }
+
     if (typeof child === 'string') {
       child = this.$().find(child);
     }
+
     focusEl(child);
   },
 
-  focusOnRerender(selector) {
-    this.one('didRender', this, () => this.focusChild(selector));
-  },
+  focusAfterRender(child) {
+    if (!child) {
+      child = this.$();
+    } else if (typeof child === 'string') {
+      child = this.$().find(child);
+    }
 
-  focusSelf() {
-    focusEl(this.$());
-  },
-
-  focusSelfOnRerender() {
-    this.one('didRender', this, () => this.focusSelf());
+    run.scheduleOnce('afterRender', null, focusEl.bind(child));
   }
 });
 

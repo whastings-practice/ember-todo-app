@@ -15,7 +15,7 @@ export default Ember.Component.extend(Focusable, {
   },
 
   didInsertElement() {
-    this.focusChild(`.${FORM_CLASS}__title-input`);
+    this.focus(`.${FORM_CLASS}__title-input`);
   },
 
   submit(event) {

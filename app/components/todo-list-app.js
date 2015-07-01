@@ -18,7 +18,7 @@ export default Ember.Component.extend(Focusable, {
 
     hideAddForm() {
       this.set('isAdding', false);
-      this.focusOnRerender(`.${ADD_BTN_CLASS}`);
+      this.focusAfterRender(`.${ADD_BTN_CLASS}`);
     },
 
     showAddForm() {
@@ -35,7 +35,7 @@ export default Ember.Component.extend(Focusable, {
   },
 
   didInsertElement() {
-    this.focusChild('h1');
+    this.focus('h1');
   },
 
   emptyMessage: computed('todoFilter', function() {
