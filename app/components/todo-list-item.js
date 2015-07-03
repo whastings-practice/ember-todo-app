@@ -6,7 +6,7 @@ var computed = Ember.computed;
 var ITEM_CLASS = 'todo-list__item';
 
 export default Ember.Component.extend(Focusable, {
-  attributeBindings: ['aria-hidden', 'aria-labelledby', 'tabindex'],
+  attributeBindings: ['aria-hidden', 'aria-labelledby', 'data-id', 'tabindex'],
   classNameBindings: [
     `isMarkedCompleted:${ITEM_CLASS}--completed:${ITEM_CLASS}--uncompleted`
   ],
@@ -64,6 +64,11 @@ export default Ember.Component.extend(Focusable, {
         action = completed ? 'Mark uncompleted' : 'Mark completed';
 
     return `${action} todo item ${title}`;
+  }),
+
+  'data-id': computed('item.id', function() {
+    var item = this.get('item');
+    return `todo-item-${item.get('id')}`;
   }),
 
   titleId: computed('item.id', function() {

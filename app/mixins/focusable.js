@@ -17,27 +17,31 @@ export default Ember.Mixin.create({
   },
 
   focus(child) {
-    if (!child) {
-      return focusEl(this.$());
-    }
-
-    if (typeof child === 'string') {
-      child = this.$().find(child);
-    }
-
+    child = findChild(this, child);
     focusEl(child);
   },
 
   focusAfterRender(child) {
-    if (!child) {
-      child = this.$();
-    } else if (typeof child === 'string') {
-      child = this.$().find(child);
-    }
+    run.scheduleOnce('afterRender', null, this.focus.bind(this, child));
+  },
 
-    run.scheduleOnce('afterRender', null, focusEl.bind(child));
+  focusWithAlert(alertMessage, child) {
+    run.scheduleOnce('afterRender', null, () => {
+      this.focus(child);
+      this.displayAlertMessage(alertMessage);
+    });
   }
 });
+
+function findChild(component, child) {
+  if (!child) {
+    return component.$();
+  }
+  if (typeof child === 'string') {
+    return component.$().find(child);
+  }
+  return child;
+}
 
 function focusEl($el) {
   var origTabIndex = $el.attr('tabindex');
