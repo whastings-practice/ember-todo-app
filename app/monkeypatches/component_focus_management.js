@@ -1,8 +1,9 @@
 import $ from 'jquery';
 import Ember from 'ember';
 
-export default Ember.Mixin.create({
+Ember.Component.reopen({
   focusManager: Ember.inject.service(),
+  focusNode: null,
 
   displayAlertMessage(message) {
     var $alertEl = $('#sr-alert');
@@ -15,14 +16,17 @@ export default Ember.Mixin.create({
   },
 
   focus(child) {
+    child = child || this.get('focusNode');
     this.get('focusManager').focusComponent(this, child);
   },
 
   focusAfterRender(child) {
+    child = child || this.get('focusNode');
     this.get('focusManager').focusComponentAfterRender(this, child);
   },
 
   focusWithAlert(alertMessage, child) {
+    child = child || this.get('focusNode');
     this.get('focusManager').focusComponentAfterRender(this, child)
       .then(this.displayAlertMessage.bind(this, alertMessage))
       .catch(console.log.bind(console));

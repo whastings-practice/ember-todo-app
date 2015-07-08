@@ -1,11 +1,10 @@
 import Ember from 'ember';
-import Focusable from '../mixins/focusable';
 
 var computed = Ember.computed;
 
 var ITEM_CLASS = 'todo-list__item';
 
-export default Ember.Component.extend(Focusable, {
+export default Ember.Component.extend({
   attributeBindings: ['aria-hidden', 'aria-labelledby', 'data-id', 'tabindex'],
   classNameBindings: [
     `isMarkedCompleted:${ITEM_CLASS}--completed:${ITEM_CLASS}--uncompleted`

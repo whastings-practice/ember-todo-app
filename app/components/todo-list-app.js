@@ -1,12 +1,11 @@
 import Ember from 'ember';
-import Focusable from '../mixins/focusable';
 
 var computed = Ember.computed;
 
 var APP_CLASS = 'todo-list-app',
     ADD_BTN_CLASS = `${APP_CLASS}__add-btn`;
 
-export default Ember.Component.extend(Focusable, {
+export default Ember.Component.extend({
   classNames: ['todo-list-app'],
   isAdding: false,
   todoFilter: 'uncompleted',

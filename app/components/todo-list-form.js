@@ -1,9 +1,8 @@
 import Ember from 'ember';
-import Focusable from '../mixins/focusable';
 
 var FORM_CLASS = 'todo-list__form';
 
-export default Ember.Component.extend(Focusable, {
+export default Ember.Component.extend({
   classNames: [FORM_CLASS],
   tagName: 'form',
   title: '',

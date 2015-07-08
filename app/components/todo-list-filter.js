@@ -1,7 +1,6 @@
 import Ember from 'ember';
-import Focusable from '../mixins/focusable';
 
-export default Ember.Component.extend(Focusable, {
+export default Ember.Component.extend({
   'aria-label': 'Todo item filters',
   attributeBindings: ['aria-label', 'role'],
   classNames: ['todo-list-filter'],
