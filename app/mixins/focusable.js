@@ -1,11 +1,9 @@
 import $ from 'jquery';
 import Ember from 'ember';
 
-var FOCUSABLE_TAGS = ['a', 'button', 'input', 'option', 'select', 'textarea'];
-
-var run = Ember.run;
-
 export default Ember.Mixin.create({
+  focusManager: Ember.inject.service(),
+
   displayAlertMessage(message) {
     var $alertEl = $('#sr-alert');
 
@@ -17,46 +15,16 @@ export default Ember.Mixin.create({
   },
 
   focus(child) {
-    child = findChild(this, child);
-    focusEl(child);
+    this.get('focusManager').focusComponent(this, child);
   },
 
   focusAfterRender(child) {
-    run.scheduleOnce('afterRender', null, this.focus.bind(this, child));
+    this.get('focusManager').focusComponentAfterRender(this, child);
   },
 
   focusWithAlert(alertMessage, child) {
-    run.scheduleOnce('afterRender', null, () => {
-      this.focus(child);
-      this.displayAlertMessage(alertMessage);
-    });
+    this.get('focusManager').focusComponentAfterRender(this, child)
+      .then(this.displayAlertMessage.bind(this, alertMessage))
+      .catch(console.log.bind(console));
   }
 });
-
-function findChild(component, child) {
-  if (!child) {
-    return component.$();
-  }
-  if (typeof child === 'string') {
-    return component.$().find(child);
-  }
-  return child;
-}
-
-function focusEl($el) {
-  var origTabIndex = $el.attr('tabindex');
-
-  $el.attr('tabindex', -1);
-  $el.focus();
-
-  if (isDefaultFocusable($el[0])) {
-    $el.removeAttr('tabindex');
-  } else if (origTabIndex === '0') {
-    $el.attr('tabindex', 0);
-  }
-}
-
-function isDefaultFocusable(el) {
-  var tagName = el.tagName.toLowerCase();
-  return FOCUSABLE_TAGS.indexOf(tagName) > -1;
-}
