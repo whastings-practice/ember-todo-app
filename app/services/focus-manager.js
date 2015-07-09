@@ -8,18 +8,15 @@ var FOCUSABLE_TAGS = ['a', 'button', 'input', 'option', 'select', 'textarea'];
 export default Ember.Service.extend({
   _afterRenderResolver: null,
   _afterRenderPromise: null,
-  _lastFocusedEl: null,
   _nextToFocus: null,
 
   focusComponent(component, child) {
     var $el = findElToFocus(component, child),
         origTabIndex = $el.attr('tabindex');
 
-    this._resetLastFocusedEl();
-
-    if (origTabIndex !== '0' && !isDefaultFocusable($el)) {
+    if (origTabIndex === undefined && !isDefaultFocusable($el)) {
       $el.attr('tabindex', -1);
-      this.set('_lastFocusedEl', {$el, origTabIndex});
+      $el.one('blur', () => $el.removeAttr('tabindex'));
     }
 
     $el.focus();
@@ -55,24 +52,6 @@ export default Ember.Service.extend({
     if (typeof resolver === 'function') {
       resolver(focusedEl);
     }
-  },
-
-  _resetLastFocusedEl() {
-    var lastFocusedEl = this.get('_lastFocusedEl');
-
-    if (!lastFocusedEl) {
-      return;
-    }
-
-    var { $el, origTabIndex } = lastFocusedEl;
-
-    if (origTabIndex === undefined) {
-      $el.removeAttr('tabindex');
-    } else {
-      $el.attr('tabindex', origTabIndex);
-    }
-
-    this.set('_lastFocusedEl', null);
   }
 });
 
