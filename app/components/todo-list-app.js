@@ -7,6 +7,7 @@ var APP_CLASS = 'todo-list-app',
 
 export default Ember.Component.extend({
   classNames: ['todo-list-app'],
+  focusNode: 'h1',
   isAdding: false,
   todoFilter: 'uncompleted',
 
@@ -37,7 +38,7 @@ export default Ember.Component.extend({
   },
 
   didInsertElement() {
-    this.focus('h1');
+    this.focus();
   },
 
   emptyMessage: computed('todoFilter', function() {
