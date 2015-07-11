@@ -44,12 +44,7 @@ export default Ember.Component.extend({
   }),
 
   'aria-hidden': computed('isMarkedCompleted', function() {
-    var isMarkedCompleted = this.get('isMarkedCompleted'),
-        showIfCompleted = this.attrs['show-if-completed'].value,
-        showIfUncompleted = this.attrs['show-if-uncompleted'].value;
-
-    return (isMarkedCompleted && !showIfCompleted) ||
-      (!isMarkedCompleted && !showIfUncompleted);
+    return !this.attrs['should-show'](this.get('item'));
   }),
 
   'aria-labelledby': computed('titleId', function() {

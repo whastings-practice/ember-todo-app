@@ -45,15 +45,14 @@ export default Ember.Component.extend({
     return `todo-list--${currentFilter}`;
   }),
 
-  showIfCompleted: computed('filter', function() {
-    var filter = this.get('filter');
-    return filter === 'all' || filter === 'completed';
-  }),
+  shouldShow(item) {
+    var filter = this.get('filter'),
+        itemCompleted = item.get('completed');
 
-  showIfUncompleted: computed('filter', function() {
-    var filter = this.get('filter');
-    return filter === 'all' || filter === 'uncompleted';
-  }),
+    return (filter === 'all') ||
+      (filter === 'completed' && itemCompleted) ||
+      (filter === 'uncompleted' && !itemCompleted);
+  },
 
   visibleItemClass: computed('filter', function() {
     var currentFilter = this.get('filter');
