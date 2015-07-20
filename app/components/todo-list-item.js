@@ -1,10 +1,11 @@
 import Ember from 'ember';
+import SrAlerts from '../mixins/sr-alerts';
 
 var computed = Ember.computed;
 
 var ITEM_CLASS = 'todo-list__item';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(SrAlerts, {
   attributeBindings: ['aria-hidden', 'aria-labelledby', 'data-id', 'tabindex'],
   classNameBindings: [
     `isMarkedCompleted:${ITEM_CLASS}--completed:${ITEM_CLASS}--uncompleted`

@@ -1,11 +1,12 @@
 import Ember from 'ember';
+import SrAlerts from '../mixins/sr-alerts';
 
 var computed = Ember.computed;
 
 var APP_CLASS = 'todo-list-app',
     ADD_BTN_CLASS = `${APP_CLASS}__add-btn`;
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(SrAlerts, {
   classNames: ['todo-list-app'],
   focusNode: 'h1',
   isAdding: false,
