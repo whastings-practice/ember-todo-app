@@ -4,6 +4,7 @@ var FORM_CLASS = 'todo-list__form';
 
 export default Ember.Component.extend({
   classNames: [FORM_CLASS],
+  notes: '',
   tagName: 'form',
   title: '',
 
@@ -18,9 +19,10 @@ export default Ember.Component.extend({
   },
 
   submit(event) {
-    var todoData = {title: this.get('title')};
+    var todoData = {title: this.get('title'), notes: this.get('notes')};
     event.preventDefault();
     this.attrs['on-submit'](todoData);
     this.set('title', '');
+    this.set('notes', '');
   }
 });

@@ -27,6 +27,10 @@ export default Ember.Component.extend(SrAlerts, {
       this.displayAlertMessage(`Deleted todo item ${title}`);
     },
 
+    openItem() {
+      this.attrs['on-open'](this.get('item'));
+    },
+
     toggleCompleted(value, checked) {
       var item = this.get('item'),
           completedDesc = checked ? 'completed' : 'uncompleted',

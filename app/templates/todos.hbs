@@ -1,2 +1,6 @@
-{{todo-list-app todos=model on-add=(action "createTodo")
-                on-update=(action "updateTodo") on-delete=(action "deleteTodo")}}
+{{#todo-list-app todos=model on-add=(action "createTodo")
+                on-update=(action "updateTodo") on-delete=(action "deleteTodo")
+                on-item-open=(action "openTodo")
+                is-showing-todo=isShowingTodo}}
+  {{outlet}}
+{{/todo-list-app}}

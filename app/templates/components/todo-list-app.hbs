@@ -8,17 +8,25 @@
 {{#if isAdding}}
   {{todo-list-form on-submit=(action "submitForm") on-cancel=(action "hideAddForm")}}
 {{else}}
-  <button class="btn todo-list-app__add-btn" type="button" {{action "showAddForm"}}>
-    Add New<span class="sr-text"> todo item</span>
-  </button>
+  <div>
+    <button class="btn todo-list-app__add-btn" type="button" {{action "showAddForm"}}>
+      Add New<span class="sr-text"> todo item</span>
+    </button>
+  </div>
 {{/if}}
 
-{{todo-list items=todos filter=todoFilter tabindex=listTabIndex
-            on-item-change=attrs.on-update on-item-delete=attrs.on-delete}}
-{{#unless todosAreVisible}}
-  <div class="todo-list-app__empty-message">
-    {{emptyMessage}}
-  </div>
-{{/unless}}
+<div class="list-container{{if isItemOpen ' with-open-item'}}">
+  {{todo-list items=todos filter=todoFilter tabindex=listTabIndex
+              on-item-change=attrs.on-update on-item-delete=attrs.on-delete
+              on-item-open=(action "openItem")}}
 
-{{todo-list-filter on-change=(action "filterTodos")}}
+  {{#unless todosAreVisible}}
+    <div class="todo-list-app__empty-message">
+      {{emptyMessage}}
+    </div>
+  {{/unless}}
+
+  {{todo-list-filter on-change=(action "filterTodos")}}
+</div>
+
+{{yield}}

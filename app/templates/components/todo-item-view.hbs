@@ -1,0 +1,14 @@
+<h2>{{item.title}}</h2>
+<button type="button" class="todo-item-view__close-btn" {{action "close"}}>
+  <span class="delete-icon" aria-hidden="true">✖</span>
+  <span class="sr-text">Close todo item {{item.title}}</span>
+</button>
+
+<div class="todo-item-view__notes{{unless item.notes ' todo-item-view__notes--empty'}}">
+  <h3>Notes</h3>
+  {{#if item.notes}}
+    {{item.notes}}
+  {{else}}
+    No notes for this item...
+  {{/if}}
+</div>

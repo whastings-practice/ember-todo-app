@@ -1,5 +1,5 @@
 {{#each items key="@identity" as |item|}}
   {{todo-list-item item=item on-change=(action "updateItem")
-         on-delete=(action "deleteItem")
+         on-delete=(action "deleteItem") on-open=attrs.on-item-open
          should-show=(bind-method 'shouldShow' this)}}
 {{/each}}

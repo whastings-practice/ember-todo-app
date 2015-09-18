@@ -1,6 +1,9 @@
 <label for="todo-form-add-title">Title of new todo item</label>
 {{input type="text" value=title placeholder="Title" id="todo-form-add-title"
         class="todo-list__form__title-input"}}
+<label for="todo-form-add-notes">Notes for new todo item</label>
+{{textarea value=notes placeholder="Notes" id="todo-form-add-notes"
+           class="todo-list__form__notes-input"}}
 <button class="btn">
   Add<span class="sr-text"> todo item</span>
 </button>

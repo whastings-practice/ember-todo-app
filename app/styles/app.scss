@@ -1,11 +1,70 @@
 @import "todo_app_styles/scss/styles";
 
 .todo-list-app {
+  .list-container {
+    float: left;
+    transition: width 0.5s ease-in .2s;
+    width: 100%;
+
+    &.with-open-item {
+      width: 50%;
+    }
+  }
+
   @include el(empty-message) {
     color: #333;
     font-size: 120%;
     font-weight: bold;
     margin-bottom: 20px;
+  }
+}
+
+.todo-list {
+  @include el(form) {
+    textarea {
+      @include input();
+      height: 100px;
+    }
+  }
+}
+
+.todo-item-view {
+  border: 1px #ddd solid;
+  border-radius: 5px;
+  float: left;
+  margin-left: 2%;
+  margin-top: 16px;
+  padding: 0 15px 15px;
+  position: relative;
+  transition: opacity .1s ease-in;
+  width: 48%;
+
+  h2 {
+    margin-top: 15px;
+  }
+
+  @include mod(hidden) {
+    opacity: 0;
+  }
+
+  @include el(close-btn) {
+    background-color: transparent;
+    border: 0;
+    font-size: 120%;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+
+  @include el(notes) {
+    h3 {
+      color: #000;
+      margin-bottom: 5px;
+    }
+
+    @include mod(empty) {
+      color: #777;
+    }
   }
 }
 

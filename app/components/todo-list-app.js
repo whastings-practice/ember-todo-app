@@ -10,6 +10,7 @@ export default Ember.Component.extend(SrAlerts, {
   classNames: ['todo-list-app'],
   focusNode: 'h1',
   isAdding: false,
+  isItemOpen: false,
   todoFilter: 'uncompleted',
 
   actions: {
@@ -20,6 +21,11 @@ export default Ember.Component.extend(SrAlerts, {
     hideAddForm() {
       this.set('isAdding', false);
       this.focusAfterRender(`.${ADD_BTN_CLASS}`);
+    },
+
+    openItem(item) {
+      this.set('isItemOpen', true);
+      this.attrs['on-item-open'](item);
     },
 
     showAddForm() {
@@ -36,6 +42,10 @@ export default Ember.Component.extend(SrAlerts, {
         })
         .catch(console.log.bind(console));
     }
+  },
+
+  didReceiveAttrs() {
+    this.set('isItemOpen', this.attrs['is-showing-todo']);
   },
 
   didInsertElement() {
