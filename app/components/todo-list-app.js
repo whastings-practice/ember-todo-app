@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import FocusableComponent from 'ember-component-focus/mixins/focusable-component';
 import SrAlerts from '../mixins/sr-alerts';
 
 var computed = Ember.computed;
@@ -6,7 +7,7 @@ var computed = Ember.computed;
 var APP_CLASS = 'todo-list-app',
     ADD_BTN_CLASS = `${APP_CLASS}__add-btn`;
 
-export default Ember.Component.extend(SrAlerts, {
+export default Ember.Component.extend(FocusableComponent, SrAlerts, {
   classNames: ['todo-list-app'],
   focusNode: 'h1',
   isAdding: false,

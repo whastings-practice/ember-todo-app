@@ -1,10 +1,7 @@
 import Ember from 'ember';
-import focusMonkeyPatch from './monkeypatches/component_focus_management';
 import Resolver from 'ember/resolver';
 import loadInitializers from 'ember/load-initializers';
 import config from './config/environment';
-
-focusMonkeyPatch();
 
 var App;
 

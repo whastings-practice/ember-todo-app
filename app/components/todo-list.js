@@ -1,8 +1,9 @@
 import Ember from 'ember';
+import FocusableComponent from 'ember-component-focus/mixins/focusable-component';
 
 var computed = Ember.computed;
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(FocusableComponent, {
   attributeBindings: ['aria-label', 'tabindex'],
   classNameBindings: ['filterClass'],
   classNames: ['todo-list'],

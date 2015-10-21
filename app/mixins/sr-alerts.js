@@ -8,7 +8,7 @@ export default Ember.Mixin.create({
   },
 
   focusWithAlert(alertMessage, child = this.get('focusNode')) {
-    this.get('focusManager').focusComponentAfterRender(this, child)
+    this.get('componentFocusManager').focusComponentAfterRender(this, child)
       .then(this.displayAlertMessage.bind(this, alertMessage))
       .catch(console.log.bind(console));
   }
